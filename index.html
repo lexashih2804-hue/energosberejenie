@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Энергосбережение в школе — материалы</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #eef7ee 0%, #f7fbf2 50%, #eef4fb 100%);
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ===== Навигация (ярлыки) ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 12px 16px;
+    }
+    .nav-title {
+      text-align: center;
+      color: #1e6b2e;
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .tab {
+      border: 2px solid #3a9a4a;
+      background: #fff;
+      color: #1e6b2e;
+      border-radius: 25px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab:hover { background: #e8f5ea; }
+    .tab.active {
+      background: linear-gradient(90deg, #1d6b2c, #3a9a4a);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 3px 8px rgba(0,80,0,0.25);
+    }
+
+    /* ===== Страницы ===== */
+    main { padding: 24px 16px 40px; }
+    .page { display: none; max-width: 1100px; margin: 0 auto; }
+    .page.active { display: block; animation: fade 0.35s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .slide {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.1);
+    }
+
+    .slide-head {
+      background: linear-gradient(90deg, #1d6b2c 0%, #3a9a4a 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: center;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 10px rgba(0,80,0,0.2);
+    }
+    .slide-head h1 { font-size: 22px; font-weight: 800; letter-spacing: 0.3px; }
+    .slide-head p { font-size: 13px; opacity: 0.95; margin-top: 6px; }
+
+    .section-title {
+      text-align: center;
+      color: #1e6b2e;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .goal, .result-bar {
+      margin-top: 20px;
+      background: linear-gradient(90deg, #1d6b2c 0%, #3a9a4a 100%);
+      color: #fff;
+      border-radius: 30px;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0,80,0,0.2);
+    }
+
+    .grid { display: grid; gap: 16px; }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g5 { grid-template-columns: repeat(5, 1fr); }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: relative;
+      border-top: 4px solid #3a9a4a;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+    .card h3 { color: #1e6b2e; font-size: 16px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .card p { color: #666; font-size: 13px; line-height: 1.5; }
+    .card ul { padding-left: 18px; color: #555; font-size: 13px; line-height: 1.7; }
+
+    .badge {
+      position: absolute; top: 12px; right: 12px;
+      width: 26px; height: 26px; border-radius: 50%;
+      color: #fff; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 12px;
+    }
+
+    .code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f7f3;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #333;
+      margin: 10px 0;
+    }
+    .foot {
+      background: #e6f5e9;
+      color: #1e6b2e;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: auto;
+    }
+    .card-col { display: flex; flex-direction: column; }
+
+    /* Цвета */
+    .blue   { border-top-color: #2d8be0; }
+    .orange { border-top-color: #f59a1b; }
+    .purple { border-top-color: #8e3fc4; }
+    .teal   { border-top-color: #13897a; }
+    .red    { border-top-color: #e03e3e; }
+    .green  { border-top-color: #3a9a4a; }
+
+    .c1 .badge { background: #3ca04f; } .c1 .icon { background: #e4f4e6; }
+    .c2 .badge { background: #2d8be0; } .c2 .icon { background: #e3f0fc; }
+    .c3 .badge { background: #f59a1b; } .c3 .icon { background: #fdf0de; }
+    .c4 .badge { background: #8e3fc4; } .c4 .icon { background: #ede4f7; }
+    .c5 .badge { background: #e03e3e; } .c5 .icon { background: #fde6e6; }
+    .c6 .badge { background: #13897a; } .c6 .icon { background: #e0f4f2; }
+
+    /* Баннер и плашки */
+    .banner {
+      background: linear-gradient(90deg, #1d6b2c 0%, #3a9a4a 100%);
+      color: #fff; border-radius: 18px; text-align: center;
+      padding: 20px; margin-bottom: 14px;
+    }
+    .banner h2 { font-size: 19px; font-weight: 800; }
+    .banner .desc { font-size: 13px; margin-top: 8px; line-height: 1.6; }
+    .pill {
+      display: inline-block; border: 2px solid #f5b544; border-radius: 30px;
+      padding: 8px 20px; color: #d9562b; font-size: 13px; font-weight: 600;
+      background: #fffbe6; margin: 14px auto 18px;
+    }
+    .pill-wrap { text-align: center; }
+
+    /* Условие */
+    .conditions {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+      background: #fff8ea; border-left: 5px solid #f59a1b;
+      border-radius: 12px; padding: 12px; margin-bottom: 18px;
+    }
+    .cond { background: #fff; border-radius: 8px; padding: 8px; text-align: center; }
+    .cond b { display: block; color: #d9562b; font-size: 17px; }
+    .cond span { font-size: 11px; color: #777; text-transform: uppercase; }
+
+    .params {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+      background: #f5fbf6; border-left: 5px solid #f59a1b;
+      border-radius: 12px; padding: 12px; margin-bottom: 18px;
+    }
+    .param { background: #fff; border-radius: 8px; padding: 10px; text-align: center; }
+    .param b { display: block; color: #1e6b2e; font-size: 18px; }
+    .param span { font-size: 12px; color: #666; }
+
+    .compare { background: #f5fbf6; border-radius: 12px; padding: 14px; margin-top: 18px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 13px; }
+    .bar-row .lbl { width: 80px; font-weight: 600; }
+    .bar-track { flex: 1; height: 22px; background: #e5ebe6; border-radius: 11px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 11px; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .stat {
+      background: rgba(255,255,255,0.15); border-radius: 12px; padding: 14px;
+      text-align: center; color: #fff;
+    }
+    .stat b { font-size: 22px; display: block; }
+    .stat span { font-size: 12px; opacity: 0.9; }
+    .final { background: linear-gradient(90deg, #1d6b2c, #3a9a4a); border-radius: 14px; padding: 16px; margin-top: 20px; }
+    .final h4 { color: #fff; font-size: 15px; margin-bottom: 4px; }
+
+    /* Автобус */
+    .small-box {
+      background: #f7faf7; border-radius: 8px; padding: 8px; font-size: 12.5px;
+      line-height: 1.5; margin-top: 8px;
+    }
+    .small-box.warn { background: #fff8e1; }
+    .help { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .help div { background: #f7faf7; border-radius: 10px; padding: 12px; font-size: 13px; }
+    .help b { color: #1e6b2e; display: block; margin-bottom: 4px; }
+
+    /* Тепло и вода */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .panel { background: #fff; border-radius: 14px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .panel h3 { color: #1e6b2e; font-size: 18px; margin-bottom: 4px; }
+    .panel .task { font-size: 11px; color: #d9562b; font-weight: 700; letter-spacing: 1px; }
+    .step {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: #fdf8f1; border-left: 4px solid #f59a1b;
+      border-radius: 8px; padding: 9px 10px; margin: 8px 0; font-size: 13px;
+    }
+    .step.b { background: #f0f7fd; border-color: #2d8be0; }
+    .step .n {
+      min-width: 24px; height: 24px; border-radius: 50%; background: #f59a1b;
+      color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .step.b .n { background: #2d8be0; }
+    .periods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+    .period { background: #f5fbf6; border-radius: 10px; padding: 12px; text-align: center; }
+    .period span { font-size: 12px; color: #666; text-transform: uppercase; }
+    .period b { display: block; font-size: 20px; color: #1e6b2e; margin: 4px 0; }
+    .period small { color: #666; font-size: 12px; }
+    .period.hl { background: #e4f4fb; border: 1px solid #9fd0ee; }
+
+    /* Система мероприятий */
+    .idea {
+      background: #fff; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px;
+      border: 1px solid #dfeee2;
+    }
+    .idea b { color: #1e6b2e; font-size: 15px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tag {
+      background: #e8f5ea; color: #1e6b2e; border-radius: 15px;
+      padding: 4px 10px; font-size: 12px; font-weight: 600;
+    }
+    .direction-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .direction-name { font-size: 16px; font-weight: 800; margin: 2px 0 10px; }
+    .verbs { font-size: 11px; color: #888; letter-spacing: 0.5px; margin-top: auto; padding-top: 10px; border-top: 1px solid #eee; text-transform: uppercase; }
+
+    /* Результаты */
+    .r-row { display: grid; gap: 16px; margin-bottom: 16px; }
+    .r-row.top { grid-template-columns: repeat(3, 1fr); }
+    .r-row.bottom { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin: 0 auto; }
+    .r-card p { color: #555; font-size: 13.5px; line-height: 1.6; min-height: 60px; }
+    .r-card .verbs { margin-top: 14px; }
+
+    /* Таблица 1 */
+    .tbl-head {
+      background: linear-gradient(90deg, #1d6b2c, #3a9a4a);
+      color: #fff; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px;
+    }
+    .tbl-head small { font-size: 11px; letter-spacing: 1px; opacity: 0.9; }
+    .tbl-head h3 { font-size: 20px; margin: 4px 0; }
+    .tbl-head p { font-size: 13px; opacity: 0.9; }
+    table.data { width: 100%; border-collapse: collapse; background: #fff; }
+    table.data th {
+      text-align: left; font-size: 11px; color: #666; letter-spacing: 1px;
+      text-transform: uppercase; padding: 10px; border-bottom: 2px solid #e5ebe6;
+    }
+    table.data td { padding: 12px 10px; border-bottom: 1px solid #eef2ee; font-size: 15px; }
+    table.data tr.base td { background: #eef3f8; }
+    table.data tr.hl td { background: #e6f5e9; }
+    .year { font-weight: 800; color: #1e6b2e; }
+    .pct {
+      display: inline-block; padding: 4px 12px; border-radius: 16px;
+      background: #e0f2e5; color: #1e6b2e; font-weight: 700; font-size: 13px;
+    }
+    .pct.base { background: #dde7f0; color: #3d5a73; }
+    .pct.strong { background: #1d7a3a; color: #fff; }
+    .tbl-bar { height: 10px; background: #e5ebe6; border-radius: 6px; overflow: hidden; width: 100%; }
+    .tbl-bar div { height: 100%; background: linear-gradient(90deg, #7fbf8e, #2e9a4a); border-radius: 6px; }
+    .sum {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+      background: #e6f5e9; border-radius: 12px; padding: 16px 20px; margin-top: 16px;
+    }
+    .sum big { font-size: 22px; font-weight: 800; color: #1e6b2e; }
+
+    /* Мониторинг */
+    .mon-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }
+    .mon-stats div { background: #f5fbf6; border-radius: 10px; padding: 10px; font-size: 13px; }
+    .mon-stats b { color: #1e6b2e; display: block; }
+    .mon-stats span { color: #777; font-size: 12px; }
+    .mon-row {
+      display: grid; grid-template-columns: 70px 1fr 1fr 1fr 1fr; gap: 10px;
+      align-items: center; padding: 8px 10px; border-radius: 8px; background: #f5fbf6; margin-bottom: 6px;
+    }
+    .mon-row.head { background: none; font-size: 11px; color: #666; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .mon-row .y { font-weight: 800; color: #1e6b2e; font-size: 16px; }
+    .mini { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+    .mini .track { flex: 1; height: 8px; background: #e5ebe6; border-radius: 4px; overflow: hidden; }
+    .mini .track div { height: 100%; border-radius: 4px; }
+    .t-st { background: #4caf6a; } .t-pa { background: #3f8fd9; } .t-pe { background: #8e5fcf; } .t-ap { background: #e8913a; }
+    .chart-wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 16px; }
+    .box { background: #fff; border: 1px solid #e5ebe6; border-radius: 12px; padding: 14px; }
+    .box h4 { color: #1e6b2e; font-size: 14px; margin-bottom: 10px; }
+    .bars { display: flex; align-items: flex-end; justify-content: space-around; height: 160px; gap: 8px; }
+    .bcol { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+    .bcol .v { font-size: 12px; font-weight: 700; color: #b5651d; margin-bottom: 3px; }
+    .bcol .fill { width: 100%; background: linear-gradient(180deg, #f5b35c, #e0893a); border-radius: 6px 6px 0 0; }
+    .bcol .yr { font-size: 11px; color: #666; margin-top: 4px; }
+    .dyn-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #f5fbf6; border-radius: 8px; padding: 9px 12px; margin-bottom: 7px; font-size: 13px;
+    }
+    .dyn-row .chg { font-weight: 700; color: #1e6b2e; }
+    .dyn-row .plus { background: #d9efe0; color: #1e6b2e; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 6px; font-weight: 700; }
+
+    /* Адаптация */
+    @media (max-width: 1000px) {
+      .g5 { grid-template-columns: repeat(3, 1fr); }
+      .conditions { grid-template-columns: repeat(3, 1fr); }
+      .params { grid-template-columns: repeat(3, 1fr); }
+      .mon-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .g3, .r-row.top { grid-template-columns: repeat(2, 1fr); }
+      .two, .chart-wrap { grid-template-columns: 1fr; }
+      .help { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .g3, .g2, .g5, .r-row.top, .r-row.bottom { grid-template-columns: 1fr; }
+      .conditions, .params, .mon-stats, .periods, .stats { grid-template-columns: repeat(2, 1fr); }
+      .slide-head h1 { font-size: 17px; }
+      .mon-row { grid-template-columns: 56px 1fr 1fr; }
+      .mon-row .hide-m { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">📚 Энергосбережение в школе</div>
+  <div class="tabs">
+    <button class="tab" data-tab="p1">1. Школа и семья</button>
+    <button class="tab" data-tab="p2">2. Задача: лампы</button>
+    <button class="tab" data-tab="p3">3. Автобус и электробус</button>
+    <button class="tab" data-tab="p4">4. Тепло и вода</button>
+    <button class="tab" data-tab="p5">5. Система мероприятий</button>
+    <button class="tab" data-tab="p6">6. Результаты</button>
+    <button class="tab" data-tab="p7">7. Потребление электроэнергии</button>
+    <button class="tab" data-tab="p8">8. Мониторинг</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ 1. ШКОЛА И СЕМЬЯ ============ -->
+<section class="page" data-page="p1">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>💡 ВЗАИМОДЕЙСТВИЕ ШКОЛЫ И СЕМЬИ ПО ЭНЕРГОСБЕРЕЖЕНИЮ</h1>
+      <p>Информационное пространство как инструмент формирования культуры энергосбережения</p>
+    </div>
+
+    <div class="banner">
+      <h2>🤝 ВЗАИМОДЕЙСТВИЕ ШКОЛЫ И СЕМЬИ</h2>
+      <div class="desc">
+        Единство требований школы и семьи<br>
+        Закрепление привычек в повседневной жизни • Родители — активные участники воспитательного процесса
+      </div>
+    </div>
+
+    <div class="pill-wrap">
+      <span class="pill">СОЗДАННОЕ ИНФОРМАЦИОННОЕ ПРОСТРАНСТВО ПОЗВОЛЯЕТ:</span>
+    </div>
+
+    <div class="grid g3">
+      <div class="card c1">
+        <span class="badge">1</span>
+        <div class="icon">🔒</div>
+        <h3>Доступность информации</h3>
+        <p>Обеспечить доступность информации по энергосбережению для всех участников образовательного процесса</p>
+      </div>
+      <div class="card c2">
+        <span class="badge">2</span>
+        <div class="icon">📢</div>
+        <h3>Повышение информированности</h3>
+        <p>Повысить информированность учащихся, родителей и педагогов</p>
+      </div>
+      <div class="card c3">
+        <span class="badge">3</span>
+        <div class="icon">🏡</div>
+        <h3>Вовлечение семей в акции и проекты</h3>
+        <p>Вовлечь семьи в практические акции и творческие проекты</p>
+      </div>
+      <div class="card c4">
+        <span class="badge">4</span>
+        <div class="icon">🌍</div>
+        <h3>Распространение успешного опыта</h3>
+        <p>Распространять успешный опыт учреждения за его пределами</p>
+      </div>
+      <div class="card c5">
+        <span class="badge">5</span>
+        <div class="icon">🌱</div>
+        <h3>Устойчивые привычки бережливого поведения</h3>
+        <p>Формировать устойчивые привычки бережливого поведения</p>
+      </div>
+      <div class="card c6">
+        <span class="badge">6</span>
+        <div class="icon">🤝</div>
+        <h3>Единое школьное сообщество</h3>
+        <p>Объединить школьное сообщество вокруг рационального использования ресурсов</p>
+      </div>
+    </div>
+
+    <div class="goal">🎯 ЦЕЛЬ: Формирование устойчивой культуры энергосбережения</div>
+  </div>
+</section>
+
+<!-- ============ 2. ЗАДАЧА: ЛАМПЫ ============ -->
+<section class="page" data-page="p2">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>💡 Задача по энергосбережению</h1>
+      <p>Замена ламп накаливания на светодиодные в актовом зале школы</p>
+    </div>
+
+    <div class="conditions">
+      <div class="cond"><b>10</b><span>ламп</span></div>
+      <div class="cond"><b>60 Вт</b><span>старая лампа</span></div>
+      <div class="cond"><b>9 Вт</b><span>LED-лампа</span></div>
+      <div class="cond"><b>5 ч</b><span>в день</span></div>
+      <div class="cond"><b>180</b><span>учебных дней</span></div>
+      <div class="cond"><b>0,25 ₽</b><span>за 1 кВт·ч</span></div>
+    </div>
+
+    <div class="grid g5">
+      <div class="card orange card-col">
+        <span class="badge" style="background:#f59a1b">1</span>
+        <div class="icon" style="background:#fdf0de">⚡</div>
+        <h3 style="color:#d9562b">Потребление за 1 день (старые)</h3>
+        <div class="code">P = 10 × 60 Вт<br>= 600 Вт = 0,6 кВт<br>t = 5 ч<br>E = 0,6 × 5 = 3 кВт·ч</div>
+        <div class="foot">✓ 3 кВт·ч / день</div>
+      </div>
+      <div class="card blue card-col">
+        <span class="badge" style="background:#2d8be0">2</span>
+        <div class="icon" style="background:#e3f0fc">📅</div>
+        <h3 style="color:#2d5fa8">Годовое потребление (старые)</h3>
+        <div class="code">E = 3 кВт·ч × 180 дней<br>E = 540 кВт·ч</div>
+        <div class="foot">✓ 540 кВт·ч / год</div>
+      </div>
+      <div class="card purple card-col">
+        <span class="badge" style="background:#8e3fc4">3</span>
+        <div class="icon" style="background:#f3eafb">💡</div>
+        <h3 style="color:#6a2c9a">Годовое потребление (LED)</h3>
+        <div class="code">P = 10 × 9 Вт = 0,09 кВт<br>E = 0,09 × 5 × 180<br>E = 81 кВт·ч</div>
+        <div class="foot">✓ 81 кВт·ч / год</div>
+      </div>
+      <div class="card teal card-col">
+        <span class="badge" style="background:#13897a">4</span>
+        <div class="icon" style="background:#e0f4f2">🌱</div>
+        <h3 style="color:#13897a">Экономия электроэнергии</h3>
+        <div class="code">ΔE = 540 − 81<br>ΔE = 459 кВт·ч</div>
+        <div class="foot">✓ 459 кВт·ч / год</div>
+      </div>
+      <div class="card red card-col">
+        <span class="badge" style="background:#e03e3e">5</span>
+        <div class="icon" style="background:#fde6e6">💰</div>
+        <h3 style="color:#c0392b">Денежная экономия</h3>
+        <div class="code">S = 459 × 0,25 ₽<br>S = 114,75 ₽</div>
+        <div class="foot" style="background:#fdd;color:#c0392b">✗ 114,75 ₽ / год</div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <b style="color:#1e6b2e;font-size:14px">📊 Сравнение за год</b>
+      <div class="bar-row">
+        <span class="lbl">🔴 Старые</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#ff9800,#f44336)">540 кВт·ч</div></div>
+      </div>
+      <div class="bar-row">
+        <span class="lbl">🟢 LED</span>
+        <div class="bar-track"><div class="bar-fill" style="width:15%;background:#4caf6a">81</div></div>
+      </div>
+    </div>
+
+    <div class="final">
+      <h4>🎯 Итог замены ламп</h4>
+      <small style="color:#dfffe6">Экономия за один учебный год</small>
+      <div class="stats">
+        <div class="stat"><b>459</b><span>кВт·ч сэкономлено</span></div>
+        <div class="stat"><b>114,75 ₽</b><span>денежная экономия</span></div>
+        <div class="stat"><b>85%</b><span>меньше энергии</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. АВТОБУС ============ -->
+<section class="page" data-page="p3">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>🚌 Дизельный автобус и электробус</h1>
+      <p>Сравнение затрат на пробег и анализ преимуществ электротранспорта</p>
+    </div>
+
+    <div class="params">
+      <div class="param"><b>S</b><span>длина маршрута, км</span></div>
+      <div class="param"><b>qд</b><span>расход дизтоплива, л/100 км</span></div>
+      <div class="param"><b>рд</b><span>цена дизтоплива, руб/л</span></div>
+      <div class="param"><b>qэ</b><span>расход электроэнергии, кВт·ч/100 км</span></div>
+      <div class="param"><b>рэ</b><span>тариф электроэнергии, руб/кВт·ч</span></div>
+    </div>
+
+    <div class="grid g5">
+      <div class="card orange card-col">
+        <span class="badge" style="background:#f59a1b">1</span>
+        <h3 style="color:#d9562b">🛢️ Дизельный автобус</h3>
+        <p>Рассчитайте расход топлива и стоимость заданного маршрута.</p>
+        <div class="code">Топливо = S × qд / 100<br>Сд = топливо × рд</div>
+        <div class="foot" style="background:#fdf0de;color:#b35a10">Стоимость маршрута: ___ руб.</div>
+      </div>
+      <div class="card blue card-col">
+        <span class="badge" style="background:#2d8be0">2</span>
+        <h3 style="color:#2d5fa8">🔋 Электробус</h3>
+        <p>Рассчитайте потребление электроэнергии и его стоимость.</p>
+        <div class="code">Энергия = S × qэ / 100<br>Сэ = энергия × рэ</div>
+        <div class="foot" style="background:#e3f0fc;color:#2d5fa8">Стоимость маршрута: ___ руб.</div>
+      </div>
+      <div class="card purple card-col">
+        <span class="badge" style="background:#8e3fc4">3</span>
+        <h3 style="color:#6a2c9a">📍 Стоимость одного километра</h3>
+        <p>Для корректного сравнения выразите расходы в одинаковых единицах.</p>
+        <div class="code">сд = Сд / S<br>сэ = Сэ / S</div>
+        <div class="foot" style="background:#f3eafb;color:#6a2c9a">Расходы на 1 км: ___ руб/км</div>
+      </div>
+      <div class="card teal card-col">
+        <span class="badge" style="background:#13897a">4</span>
+        <h3 style="color:#13897a">⚖️ Сравнение затрат</h3>
+        <p>Сопоставьте стоимость поездки на одном и том же маршруте.</p>
+        <div class="code">ΔC = Сд − Сэ</div>
+        <div class="small-box"><b>ΔC &gt; 0</b> — расходы на энергию электробуса ниже</div>
+        <div class="small-box"><b>ΔC &lt; 0</b> — расходы на топливо у дизельного автобуса ниже</div>
+        <div class="small-box"><b>ΔC = 0</b> — затраты равны</div>
+      </div>
+      <div class="card green card-col">
+        <span class="badge" style="background:#3a9a4a">5</span>
+        <h3 style="color:#1e6b2e">💬 Вывод для города</h3>
+        <p>По результатам расчёта обсудите:</p>
+        <ul>
+          <li>какой вариант дешевле на маршруте;</li>
+          <li>как транспорт влияет на городскую среду;</li>
+          <li>какую роль играют новые технологии.</li>
+        </ul>
+        <div class="small-box warn">Расчёт учитывает затраты на энергию, но не полную стоимость владения транспортом.</div>
+      </div>
+    </div>
+
+    <div class="help">
+      <div><b>⚙️ Технологическое развитие</b>Электротранспорт требует развитие зарядной инфраструктуры.</div>
+      <div><b>🍃 Экологическая безопасность</b>У электробуса нет выхлопных газов из трубы при движении.</div>
+      <div><b>📊 Экономическая эффективность</b>Сравнение расходов на топливо и электроэнергию.</div>
+    </div>
+
+    <div class="result-bar">🎯 Рассчитать затраты → сравнить варианты → сделать обоснованный вывод</div>
+  </div>
+</section>
+
+<!-- ============ 4. ТЕПЛО И ВОДА ============ -->
+<section class="page" data-page="p4">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>🌿 Бережём тепло и воду</h1>
+      <p>Расчёт потерь ресурсов и эффект от простых решений</p>
+    </div>
+
+    <div class="two">
+      <!-- Задача 1 -->
+      <div class="panel" style="border-top:4px solid #e8913a">
+        <div class="task">ЗАДАЧА № 1</div>
+        <h3>Потери тепла через окна</h3>
+        <small style="color:#777">Сравнение старого окна и современного стеклопакета</small>
+
+        <div class="params" style="margin:12px 0 0;background:#fdf8f1;border-left-color:#e8913a">
+          <div class="param"><b>15 м²</b><span>площадь остекления</span></div>
+          <div class="param"><b>2,8</b><span>старое окно, Вт/(м²·К)</span></div>
+          <div class="param"><b>1,3</b><span>стеклопакет, Вт/(м²·К)</span></div>
+          <div class="param"><b>20 К</b><span>разность температур</span></div>
+          <div class="param"><b>180 суток</b><span>отопительный сезон</span></div>
+        </div>
+
+        <div class="step"><span class="n">1</span><div><b>Теплопотери до замены</b><br><span class="code" style="display:inline;background:none;padding:0;margin:0">P₁ = 2,8 × 15 × 20 = 840 Вт = 0,84 кВт</span></div></div>
+        <div class="step"><span class="n">2</span><div><b>Теплопотери после замены</b><br><span class="code" style="display:inline;background:none;padding:0;margin:0">P₂ = 1,3 × 15 × 20 = 390 Вт = 0,39 кВт</span></div></div>
+        <div class="step"><span class="n">3</span><div><b>Снижение мощности теплопотерь</b><br><span class="code" style="display:inline;background:none;padding:0;margin:0">ΔP = 840 − 390 = 450 Вт = 0,45 кВт</span></div></div>
+        <div class="step"><span class="n">4</span><div><b>Продолжительность отопительного сезона</b><br><span class="code" style="display:inline;background:none;padding:0;margin:0">t = 180 × 24 = 4 320 часов</span></div></div>
+
+        <div class="compare" style="margin-top:14px">
+          <b style="color:#b35a10;font-size:13px">Потери тепла за сезон при ΔT = 20 К</b>
+          <div class="bar-row">
+            <span class="lbl" style="width:90px">Старое окно</span>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#f59a1b,#e8913a)">3 628,8 кВт·ч</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="lbl" style="width:90px">Стеклопакет</span>
+            <div class="bar-track"><div class="bar-fill" style="width:46%;background:#4caf6a">1 684,8 кВт·ч</div></div>
+          </div>
+        </div>
+
+        <div class="final" style="background:linear-gradient(90deg,#b35a10,#e8913a);margin-top:14px;padding:12px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;color:#fff;flex-wrap:wrap;gap:8px">
+            <div><small>ЭКОНОМИЯ ТЕПЛОВОЙ ЭНЕРГИИ ЗА СЕЗОН</small><br><b style="font-size:22px">1 944 кВт·ч</b></div>
+            <span style="background:rgba(255,255,255,.2);padding:6px 12px;border-radius:10px;font-size:13px">Снижение потерь ≈ 54%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Задача 2 -->
+      <div class="panel" style="border-top:4px solid #2d8be0">
+        <div class="task" style="color:#2d8be0">ЗАДАЧА № 2</div>
+        <h3>Потери воды из-за протечки</h3>
+        <small style="color:#777">Один неисправный кран — большие потери за год</small>
+
+        <div class="params" style="margin:12px 0 0;background:#f0f7fd;border-left-color:#2d8be0">
+          <div class="param"><b>1 капля/с</b><span>скорость утечки</span></div>
+          <div class="param"><b>0,05 мл</b><span>объём капли</span></div>
+          <div class="param"><b>30 дней</b><span>в месяце</span></div>
+          <div class="param"><b>365 дней</b><span>календарный год</span></div>
+        </div>
+
+        <div class="periods" style="grid-template-columns:1fr 1fr;margin-top:10px">
+          <div class="period hl" style="background:#f0f7fd;border-color:#dfe9f5"><span>Секунд в сутках</span><b style="font-size:16px">24 × 3 600 = 86 400 с</b></div>
+          <div class="period" style="background:#f0f7fd"><span>Потери за сутки</span><b style="font-size:16px">86 400 × 0,05 = 4 320 мл = 4,32 л</b></div>
+        </div>
+
+        <div class="periods" style="margin-top:12px">
+          <div class="period"><span>За сутки</span><b>4,32 л</b><small>0,00432 м³</small></div>
+          <div class="period"><span>За месяц</span><b>129,6 л</b><small>0,1296 м³</small></div>
+          <div class="period hl"><span>За год</span><b>1 576,8 л</b><small>1,5768 м³</small></div>
+        </div>
+
+        <div class="small-box" style="margin-top:14px;background:#f0f7fd">
+          🔎 За год набирается <b>31 536 000</b> капель. Устранение небольшой неисправности помогает избежать значительных потерь.
+        </div>
+
+        <div class="result-bar" style="margin-top:16px;background:linear-gradient(90deg,#1d4f7c,#2d8be0);padding:12px;font-size:14px">
+          ВПУСТУЮ ТЕРЯЕТСЯ ЗА КАЛЕНДАРНЫЙ ГОД: 1 576,8 л ≈ 1,5768 м³
+        </div>
+      </div>
+    </div>
+
+    <div class="result-bar">🎯 Сбережение ресурсов начинается с конкретных действий: уменьшить теплопотери и устранить утечку воды.</div>
+  </div>
+</section>
+
+<!-- ============ 5. СИСТЕМА МЕРОПРИЯТИЙ ============ -->
+<section class="page" data-page="p5">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>🌳 Система воспитательных мероприятий</h1>
+      <p>Шесть взаимосвязанных направлений работы по энергосбережению</p>
+    </div>
+
+    <div class="idea">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <small style="color:#888;letter-spacing:1px;font-size:11px">ОБЩАЯ ИДЕЯ</small><br>
+          <b>Формирование бережного отношения к энергии, воде и другим ресурсам</b>
+        </div>
+        <div class="tags">
+          <span class="tag">ШКОЛА</span><span class="tag">СЕМЬЯ</span><span class="tag">СООБЩЕСТВО</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card blue">
+        <div class="direction-label" style="color:#2d8be0">Направление 01</div>
+        <div class="direction-name" style="color:#1d4f7c">📚 Информационно-просветительское</div>
+        <ul>
+          <li>Классные и информационные часы</li>
+          <li>Беседы и просмотры видеороликов</li>
+          <li>Тематические стенды и выставки</li>
+        </ul>
+        <div class="verbs">Знать • Понимать • Обсуждать</div>
+      </div>
+      <div class="card purple">
+        <div class="direction-label" style="color:#8e3fc4">Направление 02</div>
+        <div class="direction-name" style="color:#5d2a84">🎲 Игровое</div>
+        <ul>
+          <li>Квесты и квест-путешествия</li>
+          <li>Викторины и интеллектуальные игры</li>
+          <li>Конкурсы и интерактивные задания</li>
+        </ul>
+        <div class="verbs">Играть • Исследовать • Узнавать</div>
+      </div>
+      <div class="card green">
+        <div class="direction-label" style="color:#3a9a4a">Направление 03</div>
+        <div class="direction-name" style="color:#1e6b2e">⚙️ Практико-ориентированное</div>
+        <ul>
+          <li>Акции по экономии электроэнергии и воды</li>
+          <li>Энергоаудит классов</li>
+          <li>Семейные задания и сбор вторичного сырья</li>
+        </ul>
+        <div class="verbs">Действовать • Проверять • Экономить</div>
+      </div>
+      <div class="card orange">
+        <div class="direction-label" style="color:#e8913a">Направление 04</div>
+        <div class="direction-name" style="color:#b35a10">🎨 Творческое</div>
+        <ul>
+          <li>Конкурсы плакатов, рисунков, видеороликов и памяток</li>
+          <li>Агитационные выступления</li>
+          <li>Театрализованные программы</li>
+        </ul>
+        <div class="verbs">Придумывать • Создавать • Вдохновлять</div>
+      </div>
+      <div class="card red">
+        <div class="direction-label" style="color:#d9466b">Направление 05</div>
+        <div class="direction-name" style="color:#b0284e">🤝 Волонтёрское и социальное</div>
+        <p>Учащиеся распространяют идеи бережливости среди:</p>
+        <div class="tags">
+          <span class="tag" style="background:#fde6ec;color:#b0284e">Младшеклассников</span>
+          <span class="tag" style="background:#fde6ec;color:#b0284e">Родителей</span>
+          <span class="tag" style="background:#fde6ec;color:#b0284e">Жителей микрорайона</span>
+        </div>
+        <div class="verbs">Делиться идеями • Вовлекать других</div>
+      </div>
+      <div class="card teal">
+        <div class="direction-label" style="color:#13897a">Направление 06</div>
+        <div class="direction-name" style="color:#0d6b5f">🏠 Семейное</div>
+        <ul>
+          <li>Родительские собрания и консультации</li>
+          <li>Совместные выступления</li>
+          <li>Домашние задания</li>
+        </ul>
+        <div class="verbs">Сотрудничать • Поддерживать • Подавать пример</div>
+      </div>
+    </div>
+
+    <div class="goal">🎯 РЕЗУЛЬТАТ: энергосберегающие привычки и активное участие школьного сообщества</div>
+  </div>
+</section>
+
+<!-- ============ 6. РЕЗУЛЬТАТЫ ============ -->
+<section class="page" data-page="p6">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>🏆 Результаты работы по энергосбережению</h1>
+      <p>Знания, привычки и навыки бережного отношения к ресурсам</p>
+    </div>
+
+    <div class="idea">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <small style="color:#888;letter-spacing:1px;font-size:11px">ОБЩИЙ РЕЗУЛЬТАТ</small><br>
+          <b>Формирование культуры ответственного и бережливого поведения</b>
+        </div>
+        <div class="tags">
+          <span class="tag">ЛИЧНОСТЬ</span><span class="tag">СЕМЬЯ</span><span class="tag">ШКОЛА</span><span class="tag">ОБЩЕСТВО</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-row top">
+      <div class="card r-card orange">
+        <div class="direction-label" style="color:#e8913a">Результат 01</div>
+        <div class="direction-name" style="color:#b35a10">⚡ Ответственное отношение к ресурсам</div>
+        <p>Ответственное отношение к электроэнергии, воде и теплу.</p>
+        <div class="verbs">Осознанность • Бережливость</div>
+      </div>
+      <div class="card r-card blue">
+        <div class="direction-label" style="color:#2d8be0">Результат 02</div>
+        <div class="direction-name" style="color:#1d4f7c">🔌 Экономные повседневные привычки</div>
+        <p>Привычка экономно пользоваться бытовыми приборами и школьным оборудованием.</p>
+        <div class="verbs">Привычка • Практическое действие</div>
+      </div>
+      <div class="card r-card purple">
+        <div class="direction-label" style="color:#8e3fc4">Результат 03</div>
+        <div class="direction-name" style="color:#5d2a84">🤝 Участие в жизни сообщества</div>
+        <p>Умение участвовать в коллективных делах и социальных инициативах.</p>
+        <div class="verbs">Сотрудничество • Инициативность</div>
+      </div>
+    </div>
+
+    <div class="r-row bottom">
+      <div class="card r-card red">
+        <div class="direction-label" style="color:#d9466b">Результат 04</div>
+        <div class="direction-name" style="color:#8b1e3a">📐 Проектные и творческие навыки</div>
+        <p>Навыки проектной, исследовательской и творческой деятельности.</p>
+        <div class="verbs">Исследовать • Создавать • Предлагать</div>
+      </div>
+      <div class="card r-card teal">
+        <div class="direction-label" style="color:#13897a">Результат 05</div>
+        <div class="direction-name" style="color:#0d6b5f">🌍 Понимание связи личного и общего</div>
+        <p>Понимание связи между личным поведением, состоянием окружающей среды и экономикой семьи, школы и страны.</p>
+        <div class="verbs">Личный выбор • Общее благо</div>
+      </div>
+    </div>
+
+    <div class="result-bar">🎯 ИТОГ: ответственный выбор человека влияет на окружающую среду и благополучие общества</div>
+  </div>
+</section>
+
+<!-- ============ 7. ТАБЛИЦА ПОТРЕБЛЕНИЯ ============ -->
+<section class="page" data-page="p7">
+  <div class="slide">
+    <div class="tbl-head">
+      <small>ТАБЛИЦА 1 · ЭНЕРГОСБЕРЕЖЕНИЕ</small>
+      <h3>Потребление электроэнергии и экономия</h3>
+      <p>Данные за 2020–2025 гг. · сравнение с базовым 2020 годом</p>
+    </div>
+
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Год</th>
+          <th>Потребление, кВт·ч</th>
+          <th>Визуализация</th>
+          <th>Экономия, кВт·ч</th>
+          <th>Экономия, %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="base">
+          <td><span class="year" style="color:#3d5a73">2020</span></td>
+          <td>1 480</td>
+          <td><div class="tbl-bar"><div style="width:100%;background:linear-gradient(90deg,#8ea9bf,#4f7796)"></div></div></td>
+          <td>0</td>
+          <td><span class="pct base">0,00 %</span></td>
+        </tr>
+        <tr>
+          <td><span class="year">2022</span></td>
+          <td>1 346</td>
+          <td><div class="tbl-bar"><div style="width:91%"></div></div></td>
+          <td style="color:#1e6b2e;font-weight:700">134</td>
+          <td><span class="pct">9,05 %</span></td>
+        </tr>
+        <tr>
+          <td><span class="year">2023</span></td>
+          <td>1 335</td>
+          <td><div class="tbl-bar"><div style="width:90%"></div></div></td>
+          <td style="color:#1e6b2e;font-weight:700">145</td>
+          <td><span class="pct">9,80 %</span></td>
+        </tr>
+        <tr>
+          <td><span class="year">2024</span></td>
+          <td>1 253</td>
+          <td><div class="tbl-bar"><div style="width:85%"></div></div></td>
+          <td style="color:#1e6b2e;font-weight:700">227</td>
+          <td><span class="pct">15,34 %</span></td>
+        </tr>
+        <tr class="hl">
+          <td><span class="year">2025</span></td>
+          <td>1 244</td>
+          <td><div class="tbl-bar"><div style="width:84%"></div></div></td>
+          <td style="color:#1e6b2e;font-weight:700">236</td>
+          <td><span class="pct strong">15,95 %</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sum">
+      <div>
+        <b style="color:#1e6b2e">Итог за 2025 год</b><br>
+        <small style="color:#666">Экономия рассчитана относительно 2020 года. Данные за 2021 год не представлены.</small>
+      </div>
+      <big>−236 кВт·ч · −15,95 %</big>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. МОНИТОРИНГ ============ -->
+<section class="page" data-page="p8">
+  <div class="slide">
+    <div class="slide-head">
+      <h1>📈 Мониторинг формирования навыков энергосбережения</h1>
+      <p>Анкетирование участников образовательного процесса · динамика 2016–2025 гг.</p>
+    </div>
+
+    <div class="mon-stats">
+      <div><b>🧒 Учащиеся 2–11 классов</b><span>около 115 человек</span></div>
+      <div><b>👨‍👩‍👧 Родители</b><span>около 95 человек</span></div>
+      <div><b>👩‍🏫 Педагоги</b><span>около 25 человек</span></div>
+      <div><b>🏘️ Представители социума</b><span>около 12 человек</span></div>
+      <div><b>📋 Ежегодно с 2016 года</b><span>10 циклов опроса</span></div>
+    </div>
+
+    <div class="box">
+      <h4>Результаты анкетирования (доля положительных ответов, %)</h4>
+      <div class="mon-row head">
+        <div>Год</div>
+        <div>Учащиеся</div>
+        <div>Родители</div>
+        <div>Педагоги</div>
+        <div>Применение знаний</div>
+      </div>
+
+      <div class="mon-row"><div class="y">2016</div>
+        <div class="mini">38<div class="track"><div class="t-st" style="width:38%"></div></div></div>
+        <div class="mini">31<div class="track"><div class="t-pa" style="width:31%"></div></div></div>
+        <div class="mini">61<div class="track"><div class="t-pe" style="width:61%"></div></div></div>
+        <div class="mini">24<div class="track"><div class="t-ap" style="width:24%"></div></div></div>
+      </div>
+      <div class="mon-row"><div class="y">2018</div>
+        <div class="mini">47<div class="track"><div class="t-st" style="width:47%"></div></div></div>
+        <div class="mini">39<div class="track"><div class="t-pa" style="width:39%"></div></div></div>
+        <div class="mini">68<div class="track"><div class="t-pe" style="width:68%"></div></div></div>
+        <div class="mini">32<div class="track"><div class="t-ap" style="width:32%"></div></div></div>
+      </div>
+      <div class="mon-row"><div class="y">2020</div>
+        <div class="mini">55<div class="track"><div class="t-st" style="width:55%"></div></div></div>
+        <div class="mini">48<div class="track"><div class="t-pa" style="width:48%"></div></div></div>
+        <div class="mini">76<div class="track"><div class="t-pe" style="width:76%"></div></div></div>
+        <div class="mini">44<div class="track"><div class="t-ap" style="width:44%"></div></div></div>
+      </div>
+      <div class="mon-row"><div class="y">2022</div>
+        <div class="mini">64<div class="track"><div class="t-st" style="width:64%"></div></div></div>
+        <div class="mini">57<div class="track"><div class="t-pa" style="width:57%"></div></div></div>
+        <div class="mini">85<div class="track"><div class="t-pe" style="width:85%"></div></div></div>
+        <div class="mini">55<div class="track"><div class="t-ap" style="width:55%"></div></div></div>
+      </div>
+      <div class="mon-row"><div class="y">2024</div>
+        <div class="mini">73<div class="track"><div class="t-st" style="width:73%"></div></div></div>
+        <div class="mini">66<div class="track"><div class="t-pa" style="width:66%"></div></div></div>
+        <div class="mini">90<div class="track"><div class="t-pe" style="width:90%"></div></div></div>
+        <div class="mini">64<div class="track"><div class="t-ap" style="width:64%"></div></div></div>
+      </div>
+      <div class="mon-row" style="background:#e6f5e9"><div class="y">2025</div>
+        <div class="mini">79<div class="track"><div class="t-st" style="width:79%"></div></div></div>
+        <div class="mini">72<div class="track"><div class="t-pa" style="width:72%"></div></div></div>
+        <div class="mini">94<div class="track"><div class="t-pe" style="width:94%"></div></div></div>
+        <div class="mini">71<div class="track"><div class="t-ap" style="width:71%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="box">
+        <h4>📊 Применение энергосберегающих привычек учащимися, %</h4>
+        <div class="bars">
+          <div class="bcol"><span class="v">24</span><div class="fill" style="height:60px"></div><span class="yr">2016</span></div>
+          <div class="bcol"><span class="v">32</span><div class="fill" style="height:80px"></div><span class="yr">2018</span></div>
+          <div class="bcol"><span class="v">44</span><div class="fill" style="height:110px"></div><span class="yr">2020</span></div>
+          <div class="bcol"><span class="v">55</span><div class="fill" style="height:138px"></div><span class="yr">2022</span></div>
+          <div class="bcol"><span class="v">64</span><div class="fill" style="height:160px"></div><span class="yr">2024</span></div>
+          <div class="bcol"><span class="v">71</span><div class="fill" style="height:178px"></div><span class="yr">2025</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h4>📈 Динамика 2016 → 2025</h4>
+        <div class="dyn-row"><span>🧒 Интерес учащихся</span><span><span class="chg">38% → 79%</span><span class="plus">+41 п.п.</span></span></div>
+        <div class="dyn-row"><span>👨‍👩‍👧 Интерес родителей</span><span><span class="chg">31% → 72%</span><span class="plus">+41 п.п.</span></span></div>
+        <div class="dyn-row"><span>👩‍🏫 Интерес педагогов</span><span><span class="chg">61% → 94%</span><span class="plus">+33 п.п.</span></span></div>
+        <div class="dyn-row"><span>⚡ Применение знаний в жизни</span><span><span class="chg">24% → 71%</span><span class="plus">+47 п.п.</span></span></div>
+      </div>
+    </div>
+
+    <div class="result-bar">🎯 Ежегодный мониторинг подтверждает положительную динамику: растут заинтересованность участников и применение знаний в повседневной жизни</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const pages = document.querySelectorAll('.page');
+
+  function showPage(id) {
+    if (!document.querySelector(`.page[data-page="${id}"]`)) id = 'p1';
+    pages.forEach(p => p.classList.toggle('active', p.dataset.page === id));
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+    history.replaceState(null, '', '#' + id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => showPage(t.dataset.tab)));
+
+  showPage(location.hash.slice(1) || 'p1');
+</script>
+
+</body>
+</html>
